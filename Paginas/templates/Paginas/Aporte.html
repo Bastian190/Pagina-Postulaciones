@@ -1,0 +1,190 @@
+{% load static %} 
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subvención</title>
+    <link rel="stylesheet" href="{% static 'css/subvencion.css' %}">
+    <script src="https://kit.fontawesome.com/c5df39abaa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fa-solid fa-bars" style="color: #000000;"></i>
+            </label>
+           
+            <ul>
+                <li><a class="active" href="{% url 'home' %} ">Inicio</a></li>
+                <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
+                <li><a href="{% url 'Aporte' %}">Aporte Extraordinario</a></li>
+                <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
+                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="postulacion-subvencion">
+        <h1>Postulación a Aporte Extraordinario</h1>
+        <p>
+            Los documentos indicados son requisitos necesarios para postular a una subvención municipal. 
+            De no ser presentados, la postulación será considerada inadmisible.
+        </p>
+        <p class="advertencia">
+            Los certificados indicados en los puntos 4, 5 y 6 deben haber sido emitidos con un máximo de 
+            30 días de antigüedad contados desde la fecha de presentación del proyecto.
+        </p>
+    
+        <!-- Enlace para descargar el formulario -->
+        <div class="descarga-formulario">
+            <p>Descargue aquí el formulario de postulación:</p>
+            <a href="{% static 'formularios/ANEXO 1, ORIGINAL 2025.docx' %}" class="boton-descargar" download>
+                Descargar Formulario de Postulación
+            </a>
+        </div>
+    
+        <!-- Formulario para adjuntar documentos -->
+        <form id="form-subvencion" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>1. Formulario de Postulación Completado:</label>
+                <input type="file" name="formulario" accept=".pdf,.docx" required>
+            </div>
+            <div class="form-group">
+                <label>2. Fotocopia Simple del RUT de la organización:</label>
+                <input type="file" name="rut_organizacion" accept=".pdf,.jpg,.png" required>
+            </div>
+            <div class="form-group">
+                <label>3. Fotocopia Simple de Cédula de Identidad del Representante Legal:</label>
+                <input type="file" name="ci_representante" accept=".pdf,.jpg,.png" required>
+            </div>
+            <div class="form-group">
+                <label>4. Certificado de Personalidad Jurídica Vigente:</label>
+                <input type="file" name="certificado_personalidad" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+                <label>5. Certificado de Receptores de Fondos Públicos Nacionales (Ley 19.862):</label>
+                <a href="http://www.registros19862.cl/" target="_blank">Obtener Certificado</a>
+                <input type="file" name="certificado_fondos" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+                <label>6. Fotocopia Simple de la Libreta de Ahorro o Cuenta Corriente:</label>
+                <input type="file" name="cuenta_corriente" accept=".pdf,.jpg,.png" required>
+            </div>
+            <div class="form-group">
+                <label>7. Cotizaciones realizadas (Se requieren 2 (Dos)):</label>
+                <input type="file" name="cotizaciones[]" multiple accept=".pdf,.jpg,.png" required>
+                <input type="file" name="cotizaciones[]" multiple accept=".pdf,.jpg,.png" required>
+            </div>
+            <div class="form-group">
+                <label>8. Acreditación de Propiedad: (Presentar solo para proyectos de construcción, reparación o ampliación de bienes inmuebles y para
+                    proyectos de adquisición de bienes muebles que requieren de instalación permanente).</label>
+                <input type="file" name="acreditacion_propiedad" accept=".pdf,.jpg,.png">
+            </div>
+            <div class="form-group">
+                <label>9. Declaración Jurada Simple de Aportes Propios:</label>
+                <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png">
+            </div>
+            <div class="form-group">
+                <label>10. Declaración Jurada Simple de Aportes de Terceros: (Presentar solo en caso que corresponda)</label>
+                <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
+            </div>
+            <div class="form-group">
+                <label>11. Otros Documentos (Opcional):</label>
+                <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
+            </div>
+    
+            <!-- Botón enviar -->
+            <button type="submit" class="boton-enviar">Enviar Documentos</button>
+        </form>
+    </section>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p><strong>Municipalidad de Nogales</strong></p>
+                <p>Dirección: Pedro Félix Vicuña 199</p>
+                <p>Teléfono: +56 33 2 262 811</p>
+                <p>Email: alcaldia@muninogales.cl</p>
+            </div>
+            <div class="footer-social">
+                <p><strong>Síguenos en:</strong></p>
+                <div class="footer-links">
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-instagram" ></i>
+                    </a>
+                    <a href="https://web.facebook.com/muni.nogales.7?_rdc=1&_rdr" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCpURFVn_rEYNePMMhw_-fWw" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Municipalidad de Nogales</p>
+        </div>
+    </footer>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
+</body>
+</html>

@@ -1,0 +1,427 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+nav {
+    background: white;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    border-bottom: 1px solid transparent;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .2);
+    top: 0;
+    z-index: 100;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex; 
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 100px; 
+}
+
+nav ul li a {
+    color: black;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+}
+
+
+li a:hover {
+    color: rgb(16, 62, 95); 
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: black;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    display: none; 
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block; 
+    }
+
+    nav ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.9);
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        flex-direction: column; 
+        transition: all 0.5s ease;
+    }
+
+    nav ul li {
+        margin: 20px 0; 
+    }
+
+    #check:checked ~ ul {
+        left: 0; 
+    }
+}
+
+/* Sección principal */
+section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+}
+
+/* Imagen de fondo como marca de agua */
+#fondo-img {
+    position: absolute;
+    top: 15%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%; 
+    opacity: 0.3; 
+    object-fit: contain; 
+}
+
+/* Estilo del título */
+#titulo-container {
+    position: relative;
+    z-index: 10; 
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+}
+
+#titulo {
+    font-size: 60px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin: 50px;
+    padding: 20px 0;
+}
+
+/* Responsividad: tamaño de título en pantallas pequeñas */
+@media (max-width: 1000px) {
+    #seccion1{
+        margin-top: 80px;
+    }
+    #titulo {
+        font-size: 40px; 
+        padding: 10px 0; 
+    }
+}
+
+@media (max-width: 1200px) {
+    #fondo-img {
+        width: 40%; 
+    }
+
+    #titulo {
+        font-size: 70px; 
+    }
+}
+
+@media (max-width: 858px) {
+    #fondo-img {
+        width: 50%; 
+    }
+
+    #titulo {
+        font-size: 40px; 
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    #fondo-img {
+        width: 60%;
+    }
+
+    #titulo {
+        font-size: 30px; 
+        padding: 5px 0; 
+    }
+}
+
+
+
+footer {
+    background-color: #333; 
+    color: #fff; 
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+   
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+   
+}
+
+.footer-info {
+    max-width: 50%; 
+}
+
+.footer-info p {
+    margin: 5px 0; 
+}
+
+.footer-social {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+.footer-social p {
+    font-size: 18px;
+    color: #fff; 
+    margin-bottom: 10px; 
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #fff; 
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Colores específicos para cada red social */
+.footer-links a .fa-instagram:hover {
+    color: #e1306c; 
+}
+
+.footer-links a .fa-facebook:hover {
+    color: #4267B2;
+}
+
+.footer-links a .fa-x-twitter:hover {
+    color: #1DA1F2; 
+}
+
+.footer-links a .fa-youtube:hover {
+    color: #FF0000;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    footer{
+        margin-top: 100px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        max-width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+#postula {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+#postula h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.subvenciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 20px; /* Espaciado entre los elementos */
+    padding: 0 10px;
+    align-items: center; /* Centra los elementos verticalmente */
+    margin-left:40px ;
+}
+
+.subvencion-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px; /* Controla el ancho máximo */
+}
+
+.subvencion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.subvencion-item i {
+    font-size: 2.5rem;
+    color:  var(--color-azul-claro);
+    margin-bottom: 10px;
+}
+
+.subvencion-item p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+.subvencion-item a {
+    text-decoration: none;
+    color: inherit; /* Mantiene el color del texto */
+}
+/* Media Queries */
+@media (max-width: 768px) {
+    .subvenciones-grid {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
+        margin-top: 180px;
+    }
+
+    .subvencion-item {
+        width: 90%; /* Ajustar tamaño de los elementos */
+    }
+    #postula h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        position: absolute; /* Hace que el título se posicione sobre los demás elementos */
+        top: 10px;  /* Ajusta la posición del título desde el top */
+        left: 50%;
+        transform: translateX(-50%); /* Centra el título horizontalmente */
+    }
+}
+
+@media (max-width: 480px) {
+    .subvenciones-grid {
+        grid-template-columns: repeat(2, 1fr); /* Una columna en pantallas pequeñas */
+        margin-top: 180px;
+    }
+
+    .subvencion-item {
+        width: 90%; /* Los elementos ocupan más espacio en pantallas pequeñas */
+    }
+
+    .subvencion-item i {
+        font-size: 24px; /* Reducir el tamaño de los íconos en móviles */
+    }
+
+    .subvencion-item p {
+        font-size: 14px; /* Reducir el tamaño del texto en móviles */
+    }
+    #postula h1{
+        font-size: 24px;
+        margin-bottom: 10px;
+        position: absolute; /* Hace que el título se posicione sobre los demás elementos */
+        top: 10px;  /* Ajusta la posición del título desde el top */
+        left: 50%;
+        transform: translateX(-50%); /* Centra el título horizontalmente */
+        
+    }
+}
+/* Línea divisoria más visible entre secciones */
+section + section {
+    border-top: 2px solid #ddd;
+}
+
+/* Responsividad para la sección */
+@media (max-width: 768px) {
+    #postula {
+        font-size: 18px; /* Texto más pequeño en pantallas pequeñas */
+    }
+}
+
+
+
+
+
+
+
+:root {
+    --color-azul-oscuro: #003366;
+    --color-azul-claro: #336699;
+    --color-blanco: #FFFFFF;
+    --color-gris-claro: #CCCCCC;
+    --color-verde: #669933;
+}
+
+body {
+    background-color: var(--color-blanco);
+    color: var(--color-azul-oscuro);
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--color-azul-oscuro);
+    color: var(--color-blanco);
+}
+
+
+
+nav a {
+    color: var(--color-blanco);
+}
+
+button {
+    background-color: var(--color-verde);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-azul-oscuro);
+}
+

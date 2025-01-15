@@ -1,0 +1,288 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+nav {
+    background: white;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    border-bottom: 1px solid transparent;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .2);
+    top: 0;
+    z-index: 100;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex; 
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 100px; 
+}
+
+nav ul li a {
+    color: black;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s ease; 
+}
+
+
+li a:hover {
+    color: rgb(16, 62, 95); 
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: black;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    display: none; 
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block; 
+    }
+
+    nav ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.9);
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        flex-direction: column; 
+        transition: all 0.5s ease;
+    }
+
+    nav ul li {
+        margin: 20px 0; 
+    }
+
+    #check:checked ~ ul {
+        left: 0; 
+    }
+}
+#postulacion-subvencion {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 100px;
+}
+
+#postulacion-subvencion h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#postulacion-subvencion p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.advertencia {
+    color: red;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.boton-enviar {
+    grid-column: span 2; /* Hacer que el botón ocupe las dos columnas */
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-enviar:hover {
+    background-color: #0056b3;
+}
+.descarga-formulario {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.descarga-formulario p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.boton-descargar {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #28a745;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-descargar:hover {
+    background-color: #218838;
+}
+#form-subvencion {
+    width: 80%;
+    margin: 0 auto; /* Centrar el formulario */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+    gap: 20px; /* Espaciado entre elementos */
+}
+#form-subvencion .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+footer {
+    background-color: #333; 
+    color: #fff; 
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+   
+}
+
+.footer-info {
+    max-width: 50%; 
+}
+
+.footer-info p {
+    margin: 5px 0; 
+}
+
+.footer-social {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+.footer-social p {
+    font-size: 18px;
+    color: #fff; 
+    margin-bottom: 10px; 
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #fff; 
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Colores específicos para cada red social */
+.footer-links a .fa-instagram:hover {
+    color: #e1306c; 
+}
+
+.footer-links a .fa-facebook:hover {
+    color: #4267B2;
+}
+
+.footer-links a .fa-x-twitter:hover {
+    color: #1DA1F2; 
+}
+
+.footer-links a .fa-youtube:hover {
+    color: #FF0000;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    footer{
+        margin-top: 100px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        max-width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
