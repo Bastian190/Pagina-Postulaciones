@@ -19,3 +19,9 @@ def fondeve(request):
 def subvencion(request):
 
     return render(request,'Paginas/subvencion.html')
+def Login(request):
+
+    return render(request,'Paginas/Login.html')
+def Registro(request):
+
+    return render(request,'Paginas/Registro.html')

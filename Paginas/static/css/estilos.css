@@ -27,7 +27,7 @@ nav ul {
 
 nav ul li {
     display: inline-block;
-    margin: 0 100px; 
+    margin: 0 80px; 
 }
 
 nav ul li a {
@@ -38,6 +38,7 @@ nav ul li a {
     text-transform: uppercase;
     text-decoration: none;
     transition: color 0.3s ease; 
+    text-align: center;
 }
 
 
@@ -57,7 +58,21 @@ li a:hover {
 #check {
     display: none;
 }
+.login-icon {
+    color: black;
+    font-size: 25px;
+    display: flex;
+    align-items: center; /* Alinea el ícono con el texto */
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 7px 13px;
+    border-radius: 3px;
+    transition: color 0.3s ease;
+}
 
+.login-icon:hover {
+    color: rgb(16, 62, 95); /* Cambia de color al pasar el cursor */
+}
 @media (max-width: 858px) {
     .checkbtn {
         display: block; 
@@ -81,6 +96,22 @@ li a:hover {
 
     #check:checked ~ ul {
         left: 0; 
+    }
+    nav ul li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%; 
+        text-decoration: none; 
+    }
+    .login-icon {
+        font-size: 28px; /* Ajusta el tamaño del ícono */
+        color: black; /* Color del ícono */
+        text-align: center; /* Centra el ícono */
+    }
+
+    .login-icon i {
+        margin-right: 8px; /* Espacio entre ícono y texto */
     }
 }
 
@@ -285,10 +316,10 @@ footer {
 
 .subvenciones-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 20px; /* Espaciado entre los elementos */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     padding: 0 10px;
-    align-items: center; /* Centra los elementos verticalmente */
+    align-items: center;
     margin-left:40px ;
 }
 
@@ -300,7 +331,7 @@ footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 250px; /* Controla el ancho máximo */
+    max-width: 250px;
 }
 
 .subvencion-item:hover {
@@ -321,52 +352,52 @@ footer {
 }
 .subvencion-item a {
     text-decoration: none;
-    color: inherit; /* Mantiene el color del texto */
+    color: inherit;
 }
 /* Media Queries */
 @media (max-width: 768px) {
     .subvenciones-grid {
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
+        grid-template-columns: repeat(2, 1fr);
         margin-top: 180px;
     }
 
     .subvencion-item {
-        width: 90%; /* Ajustar tamaño de los elementos */
+        width: 90%;
     }
     #postula h1 {
         font-size: 24px;
         margin-bottom: 10px;
-        position: absolute; /* Hace que el título se posicione sobre los demás elementos */
-        top: 10px;  /* Ajusta la posición del título desde el top */
+        position: absolute;
+        top: 10px;  
         left: 50%;
-        transform: translateX(-50%); /* Centra el título horizontalmente */
+        transform: translateX(-50%);
     }
 }
 
 @media (max-width: 480px) {
     .subvenciones-grid {
-        grid-template-columns: repeat(2, 1fr); /* Una columna en pantallas pequeñas */
+        grid-template-columns: repeat(2, 1fr);
         margin-top: 180px;
     }
 
     .subvencion-item {
-        width: 90%; /* Los elementos ocupan más espacio en pantallas pequeñas */
+        width: 90%;
     }
 
     .subvencion-item i {
-        font-size: 24px; /* Reducir el tamaño de los íconos en móviles */
+        font-size: 24px;
     }
 
     .subvencion-item p {
-        font-size: 14px; /* Reducir el tamaño del texto en móviles */
+        font-size: 14px;
     }
     #postula h1{
         font-size: 24px;
         margin-bottom: 10px;
-        position: absolute; /* Hace que el título se posicione sobre los demás elementos */
-        top: 10px;  /* Ajusta la posición del título desde el top */
+        position: absolute;
+        top: 10px;
         left: 50%;
-        transform: translateX(-50%); /* Centra el título horizontalmente */
+        transform: translateX(-50%);
         
     }
 }
@@ -378,7 +409,7 @@ section + section {
 /* Responsividad para la sección */
 @media (max-width: 768px) {
     #postula {
-        font-size: 18px; /* Texto más pequeño en pantallas pequeñas */
+        font-size: 18px;
     }
 }
 

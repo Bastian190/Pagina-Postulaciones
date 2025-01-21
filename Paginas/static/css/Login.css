@@ -1,0 +1,115 @@
+/* Paleta de Colores */
+:root {
+    --primarycolor: #ffffff;
+    --bcolor: #a3d2ca;
+    --ccolor: #d6d6cf;
+    --dcolor: #cde0ec;
+    --ecolor: #ffffff;
+    --fcolor: #601abc;
+
+}
+
+.box-shadow {
+    -webkit-box-shadow: -1px 3px 20px 4Spx rgba(0,0,0,0.34);
+    -moz-box-shadow: -1px 3px 20px 4px rgba(0,0,0,0.34);
+    box-shadow: 1px 3px 20px 4px rgba(0,0,0,0.34);
+    margin: auto;
+    border-radius: 2rem;
+    width: 800px;
+    height: 500px; 
+    padding: 2rem;
+}
+
+.formulario {
+    width: min(30rem, 100%);
+    margin: 0 auto;
+    padding: 2rem;
+    font-size: 70%;   
+    margin-top: 80px;
+}
+
+h1{
+    text-align: center;
+    color: #601abc;
+    font-style: italic; 
+}
+
+.input-text {
+    width: 100%;
+    border: none;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    margin-bottom: 50px;
+}
+
+.sign-txt{
+    
+    text-align: center;
+}
+.sign-txt a{
+    text-decoration: none;
+}
+.col{
+    text-align: center;
+}
+ 
+
+.inicio{
+    width: min(60rem, 100%);
+    margin: auto;
+    padding: 2rem;
+    display: block;
+    font-size: 2rem;
+    width: auto;
+    background-color: var(--primarycolor); 
+}
+
+.inicio fieldset{
+    border-color: #000000;
+}
+
+#nombreis{
+    border-radius: 1cm; 
+}
+
+#contra3{
+    border-radius: 1cm;
+}
+
+#is{
+    border-radius: 1rem;
+}
+legend{
+    font-style: oblique;
+}
+#errornombreis{
+    color: #dc143c;
+}
+#errorcontrasenais{
+    color: #dc143c;
+}
+
+#errornomc{
+    color: #dc143c; 
+}
+
+#erroremc{
+    color: #dc143c;  
+}
+
+#errormensc{
+    color: #dc143c;
+}
+#iniciar{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color:#336699;
+}
+
+input[type=text], [type=password] {
+    border: 1px solid #111;
+    border-radius: 8px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    
+}
