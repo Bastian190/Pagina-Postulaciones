@@ -5,25 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subvención</title>
+    <title>Aporte extraordinario</title>
     <link rel="stylesheet" href="{% static 'css/subvencion.css' %}">
     <script src="https://kit.fontawesome.com/c5df39abaa.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav>
+            <!-- Checkbox para el menú responsivo -->
             <input type="checkbox" id="check">
             <label for="check" class="checkbtn">
                 <i class="fa-solid fa-bars" style="color: #000000;"></i>
             </label>
-           
-            <ul>
-                <li><a class="active" href="{% url 'home' %} ">Inicio</a></li>
+    
+            <!-- Menú principal -->
+            <ul class="menu">
+                <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
-                <li><a href="{% url 'Aporte' %}">Aporte Extraordinario</a></li>
+                <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
                 <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
                 <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
-                <li><a href="{% url 'Login' %}" class="login-icon"><i class="fa-solid fa-user" style="color: #000000;"></i></i></a></li>
+                {% if user.is_authenticated %}
+                    <li class="saludo">Bienvenido, {{ user.nombre }}</li>
+                    <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -49,7 +56,10 @@
         </div>
     
         <!-- Formulario para adjuntar documentos -->
-        <form id="form-subvencion" enctype="multipart/form-data" novalidate>
+        <form method="POST" id="form-subvencion" action="{% url 'Aporte' %}" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="aporte_extraordinario">
+            
             <div class="form-group">
                 <label>1. Formulario de Postulación Completado:</label>
                 <input type="file" name="formulario" accept=".pdf,.docx" required>
@@ -89,17 +99,22 @@
                 <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
             </div>
             <div class="form-group">
-                <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda): </label>
+                <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda):</label>
                 <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
             </div>
             <div class="form-group">
                 <label>11. Otros Documentos cuando corresponda (Opcional):</label>
                 <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
             </div>
-        
-            <!-- Botón enviar -->
+            
             <button type="submit" class="boton-enviar">Enviar Documentos</button>
         </form>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        
     </section>
 
 

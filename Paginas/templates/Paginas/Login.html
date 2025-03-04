@@ -13,73 +13,69 @@
 <body>
     <header>
         <nav>
+            <!-- Checkbox para el menú responsivo -->
             <input type="checkbox" id="check">
             <label for="check" class="checkbtn">
                 <i class="fa-solid fa-bars" style="color: #000000;"></i>
             </label>
-           
-            <ul>
-                <li><a class="active" href="{% url 'home' %} ">Inicio</a></li>
+    
+            <!-- Menú principal -->
+            <ul class="menu">
+                <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
                 <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
                 <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
-                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li> 
-                <li><a href="{% url 'Login' %}" class="login-icon"><i class="fa-solid fa-user" style="color: #000000;"></i></i></a></li>
+                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
+                {% if user.is_authenticated %}
+                    <li class="saludo">Bienvenido, {{ user.nombre }}</li>
+                    <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
 
     <section class="inicio">
         <fieldset>
-            <form 
-                method="POST" 
-                action="" 
-                class="formulario box-shadow" 
-                onsubmit="return validarFormulario()"
-                novalidate
-            >
+            <form method="POST" action="{% url 'Login' %}" class="formulario box-shadow" onsubmit="return validarFormulario()" novalidate>
+                {% csrf_token %}
                 <h1>Inicio de sesión</h1>
                 <div class="form_group" id="formulario">
-                    <!-- Campo de Usuario -->
                     <div class="mb-3">
-                        <label for="usuario" class="form-label">Usuario:</label>
-                        <input 
-                            type="text" 
-                            id="usuario" 
-                            name="usuario" 
-                            class="form-control" 
-                            placeholder="Ingresa tu usuario" 
-                            required 
-                        />
-                        <div id="usuarioError" class="invalid-feedback">
-                            El campo de usuario no puede estar vacío y debe tener al menos 4 caracteres.
-                        </div>
+                        <label for="usuario" class="form-label">Correo:</label>
+                        <input type="email" id="usuario" name="usuario" class="form-control" placeholder="Ingresa tu correo" required />
+                        <div id="usuarioError" class="invalid-feedback">El campo de correo no puede estar vacío.</div>
                     </div>
-                    
-                    <!-- Campo de Contraseña -->
+            
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña:</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-control" 
-                            placeholder="Ingresa tu contraseña" 
-                            required 
-                        />
-                        <div id="passwordError" class="invalid-feedback">
-                            La contraseña debe tener al menos 6 caracteres.
-                        </div>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Ingresa tu contraseña" required />
+                        <div id="passwordError" class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
                     </div>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary btn-lg" id="iniciar">Iniciar Sesión</button>
-                <div></div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="sign-txt">¿No estás registrado? <a href="{% url 'Registro' %}">Regístrate ahora</a></div>
+            
+                <div class="sign-txt">
+                    ¿No estás registrado? <a href="{% url 'Registro' %}">Regístrate ahora</a>
+                </div>
             </form>
+            
+    
+            <!-- Mensajes de Django -->
+            {% if messages %}
+                <div class="alert-container">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </fieldset>
     </section>
+    
 
     
         <script src="{% static 'js/inicio.js' %}"></script>

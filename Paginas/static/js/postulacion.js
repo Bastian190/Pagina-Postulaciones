@@ -64,6 +64,28 @@ document.addEventListener("DOMContentLoaded", function () {
             showError(firstCotizacionInput, `Ambas cotizaciones son obligatorias.`);
         }
 
+        // Validación para el campo "Acreditación de Propiedad" (opcional)
+        const acreditacionInput = form.querySelector('[name="acreditacion_propiedad"]');
+        if (acreditacionInput && acreditacionInput.files.length > 0 && acreditacionInput.files[0].type !== "application/pdf") {
+            isValid = false;
+            showError(acreditacionInput, `La Acreditación de Propiedad debe ser un archivo PDF.`);
+        }
+
+        // Validación para los campos "Otros Documentos" (opcional)
+        const otrosDocumentosInputs = form.querySelectorAll('[name="otros_documentos[]"]');
+        if (otrosDocumentosInputs.length > 0) {
+            let otrosDocumentosValidos = true;
+            otrosDocumentosInputs.forEach(input => {
+                if (input.files.length > 0 && !Array.from(input.files).every(file => file.type === "application/pdf" || file.type.startsWith("image/"))) {
+                    otrosDocumentosValidos = false;
+                }
+            });
+            if (!otrosDocumentosValidos) {
+                isValid = false;
+                showError(otrosDocumentosInputs[0], `Los archivos de "Otros Documentos" deben ser PDF o imágenes.`);
+            }
+        }
+
         // Si no es válido, mostrar mensaje
         if (!isValid) {
             alert("Por favor complete todos los campos obligatorios.");

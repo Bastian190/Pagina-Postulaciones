@@ -1,5 +1,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,24 +13,32 @@
 <body>
     <header>
         <nav>
+            <!-- Checkbox para el menú responsivo -->
             <input type="checkbox" id="check">
             <label for="check" class="checkbtn">
                 <i class="fa-solid fa-bars" style="color: #000000;"></i>
             </label>
-           
-            <ul>
-                <li><a class="active" href="{% url 'home' %} ">Inicio</a></li>
+    
+            <!-- Menú principal -->
+            <ul class="menu">
+                <li><a  href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
                 <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
                 <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
-                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li> 
-                <li><a href="{% url 'Login' %}" class="login-icon"><i class="fa-solid fa-user" style="color: #000000;"></i></i></a></li>
+                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
+                {% if user.is_authenticated %}
+                    <li  class="saludo">Bienvenido, {{ user.nombre }}</li>
+                    <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <section class="registro">
         <fieldset>
-            <form method="POST" action="" class="formulario box-shadow" novalidate onsubmit="return validarFormulario()">
+            <form method="POST" action="{% url 'Registro' %}" class="formulario box-shadow" novalidate onsubmit="return validarFormulario()">
+                {% csrf_token %}
                 <h1>Registro</h1>
                 
                 <!-- Campo de Nombre -->
@@ -107,6 +116,15 @@
                 <!-- Botón de Registro -->
                 <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
             </form>
+            {% if messages %}
+                <div class="alert-container">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </fieldset>
     </section>
     

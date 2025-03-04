@@ -1,0 +1,477 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--color-blanco);
+    color: var(--color-azul-oscuro);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* Cabecera */
+header {
+    background-color: var(--color-azul-oscuro);
+    color: var(--color-blanco);
+}
+
+/* Barra de navegación */
+nav {
+    background: white;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--color-gris-claro);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre elementos */
+}
+
+nav ul {
+    display: flex;
+    gap: 20px; /* Aumenta el espacio entre opciones */
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    color: black;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+nav ul li a.active, 
+nav ul li a:hover {
+    color: rgb(187, 29, 147);
+}
+
+.saludo {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-left: 20px; /* Separar del resto */
+}
+
+/* Botón de menú (responsive) */
+.checkbtn {
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+    display: none; /* Ocultar por defecto */
+}
+
+.checkbtn:hover {
+    color: rgb(187, 29, 147);
+}
+
+#check {
+    display: none;
+}
+
+/* Botones */
+button {
+    background-color: var(--color-verde);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--color-azul-oscuro);
+}
+
+/* Responsividad */
+@media (max-width: 952px) {
+    nav ul li a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block; /* Mostrar el botón de menú */
+    }
+
+    nav ul {
+        position: fixed;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        top: 80px;
+        left: -100%;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        transition: left 0.5s ease;
+    }
+
+    nav ul li {
+        margin: 20px 0; /* Más espacio entre opciones */
+    }
+
+    #check:checked ~ ul {
+        left: 0; /* Despliega el menú */
+    }
+}
+
+/* Sección principal */
+section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
+}
+
+/* Imagen de fondo como marca de agua */
+#fondo-img {
+    position: absolute;
+    top: 15%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%; 
+    opacity: 0.3; 
+    object-fit: contain; 
+}
+
+/* Estilo del título */
+#titulo-container {
+    position: relative;
+    z-index: 10; 
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+}
+
+#titulo {
+    font-size: 60px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin: 50px;
+    padding: 20px 0;
+}
+
+@media (max-width: 1000px) {
+    #seccion1{
+        margin-top: 80px;
+    }
+    #titulo {
+        font-size: 40px; 
+        padding: 10px 0; 
+    }
+}
+
+@media (max-width: 1200px) {
+    #fondo-img {
+        width: 40%; 
+    }
+
+    #titulo {
+        font-size: 70px; 
+    }
+}
+
+@media (max-width: 858px) {
+    #fondo-img {
+        width: 50%; 
+    }
+
+    #titulo {
+        font-size: 40px; 
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    #fondo-img {
+        width: 60%;
+    }
+
+    #titulo {
+        font-size: 30px; 
+        padding: 5px 0; 
+    }
+}
+
+
+
+footer {
+    background-color: #333; 
+    color: #fff; 
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+   
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+   
+}
+
+.footer-info {
+    max-width: 50%; 
+}
+
+.footer-info p {
+    margin: 5px 0; 
+}
+
+.footer-social {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+.footer-social p {
+    font-size: 18px;
+    color: #fff; 
+    margin-bottom: 10px; 
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #fff; 
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Colores específicos para cada red social */
+.footer-links a .fa-instagram:hover {
+    color: #e1306c; 
+}
+
+.footer-links a .fa-facebook:hover {
+    color: #4267B2;
+}
+
+.footer-links a .fa-x-twitter:hover {
+    color: #1DA1F2; 
+}
+
+.footer-links a .fa-youtube:hover {
+    color: #FF0000;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    footer{
+        margin-top: 100px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        max-width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+#postula {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+#postula h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.subvenciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 10px;
+    align-items: center;
+    margin-left:40px ;
+}
+
+.subvencion-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px;
+}
+
+.subvencion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.subvencion-item i {
+    font-size: 2.5rem;
+    color:  var(--color-azul-claro);
+    margin-bottom: 10px;
+}
+
+.subvencion-item p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+.subvencion-item a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Media Queries */
+@media (max-width: 768px) {
+    .subvenciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 180px;
+    }
+
+    .subvencion-item {
+        width: 90%;
+    }
+    #postula h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        position: absolute;
+        top: 10px;  
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .subvenciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 180px;
+    }
+
+    .subvencion-item {
+        width: 90%;
+    }
+
+    .subvencion-item i {
+        font-size: 24px;
+    }
+
+    .subvencion-item p {
+        font-size: 14px;
+    }
+    #postula h1{
+        font-size: 24px;
+        margin-bottom: 10px;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+    }
+}
+/* Línea divisoria más visible entre secciones */
+section + section {
+    border-top: 2px solid #ddd;
+}
+
+/* Responsividad para la sección */
+@media (max-width: 768px) {
+    #postula {
+        font-size: 18px;
+    }
+}
+
+
+
+
+
+
+
+:root {
+    --color-azul-oscuro: #003366;
+    --color-azul-claro: #336699;
+    --color-blanco: #FFFFFF;
+    --color-gris-claro: #CCCCCC;
+    --color-verde: #669933;
+}
+
+body {
+    background-color: var(--color-blanco);
+    color: var(--color-azul-oscuro);
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--color-azul-oscuro);
+    color: var(--color-blanco);
+}
+
+
+
+nav a {
+    color: var(--color-blanco);
+}
+
+button {
+    background-color: var(--color-verde);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-azul-oscuro);
+}
+

@@ -1,118 +1,207 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+/* Variables de color */
+:root {
+    --color-azul-oscuro: #003366;
+    --color-azul-claro: #336699;
+    --color-blanco: #FFFFFF;
+    --color-gris-claro: #CCCCCC;
+    --color-verde: #669933;
 }
 
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--color-blanco);
+    color: var(--color-azul-oscuro);
+}
+
+/* Reset */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* Navbar */
 nav {
-    background: white;
+    background: var(--color-blanco);
     height: 80px;
     width: 100%;
     position: fixed;
-    border-bottom: 1px solid transparent;
-    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .2);
+    border-bottom: 1px solid var(--color-gris-claro);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     top: 0;
     z-index: 100;
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex; 
-}
-
-nav ul li {
-    display: inline-block;
-    margin: 0 80px; 
-}
-
-nav ul li a {
-    color: black;
-    font-size: 18px;
-    padding: 7px 13px;
-    border-radius: 3px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: color 0.3s ease; 
-    text-align: center;
-}
-
-
-li a:hover {
-    color: rgb(16, 62, 95); 
-}
-
+/* Icono del menú */
 .checkbtn {
     font-size: 30px;
-    color: black;
-    position: absolute;
-    right: 20px;
+    color: var(--color-azul-oscuro);
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
     cursor: pointer;
-    display: none; 
-}
-
-#check {
     display: none;
-}
-.login-icon {
-    color: black;
-    font-size: 25px;
-    display: flex;
-    align-items: center; /* Alinea el ícono con el texto */
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 7px 13px;
-    border-radius: 3px;
     transition: color 0.3s ease;
 }
 
-.login-icon:hover {
-    color: rgb(16, 62, 95); /* Cambia de color al pasar el cursor */
+.checkbtn:hover {
+    color: var(--color-azul-claro);
 }
+
+/* Checkbox oculto */
+#check {
+    display: none;
+}
+
+/* Menú principal */
+nav ul {
+    float: right;
+    margin-right: 330px;
+    display: flex;
+    gap: 20px; /* Espaciado entre elementos */
+}
+
+/* Ítems del menú */
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+
+/* Enlaces del menú */
+nav ul li a {
+    color:black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.4s, transform 0.3s;
+    text-decoration: none;
+}
+
+/* Efecto de subrayado animado */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--color-azul-claro);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1); /* Aparece al pasar el cursor */
+}
+
+/* Elimina el subrayado de la opción "Inicio" */
+nav ul li a.active::after {
+    transform: scaleX(0);
+}
+
+/* Enlace activo o hover */
+li a.active,
+li a:hover {
+    color: var(--color-azul-claro);
+}
+
+/* Saludo del usuario */
+.saludo {
+    display: flex;
+    align-items: center;
+    color: black; 
+    font-size: 18px; 
+    text-transform: capitalize;
+    text-transform: uppercase;
+    padding: 0 20px;
+}
+
+.saludo:hover {
+    color: var(--color-azul-claro);
+}
+
+/* Botones */
+button {
+    background-color:var(--color-azul-claro);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-azul-oscuro);
+}
+
+/* Estilos para el menú en pantallas pequeñas */
 @media (max-width: 858px) {
     .checkbtn {
-        display: block; 
+        display: block;
     }
 
-    nav ul {
+    ul.menu {
+        display: block;
         position: fixed;
-        width: 100%;
+        width: 70%;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.2);
         top: 80px;
-        left: -100%;
+        left: -95%;
         text-align: center;
-        flex-direction: column; 
-        transition: all 0.5s ease;
+        transition: all .5s;
+        backdrop-filter: blur(80rem, 80rem);
     }
 
     nav ul li {
-        margin: 20px 0; 
+        display: block;
+        margin: 50px 0;
+        line-height: 40px;
+        text-size-adjust: 20px;
     }
 
-    #check:checked ~ ul {
-        left: 0; 
-    }
     nav ul li a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%; 
-        text-decoration: none; 
-    }
-    .login-icon {
-        font-size: 28px; 
-        color: black;
-        text-align: center; 
+        font-size: 20px; 
     }
 
-    .login-icon i {
-        margin-right: 8px; 
+    li a.active,
+    li a:hover {
+    color: var(--color-azul-claro);
     }
+    button:hover {
+        background-color: var(--color-azul-oscuro);
+    }
+  
+    #check:checked~ul {
+      left: 0;
+    }
+
+    .saludo {
+        display: block;
+        font-size: 18px;
+        color:black; 
+    }
+    .saludo:hover {
+        color: var(--color-azul-claro);
+    }
+    nav ul li a:hover::after {
+        transform: scaleX(1); 
+    }
+    
+    nav ul li a.active::after {
+        transform: scaleX(0);
+    }
+    
 }
 #postulacion-subvencion {
     max-width: 80%;

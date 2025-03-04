@@ -1,0 +1,372 @@
+/* Variables de color */
+:root {
+    --color-azul-oscuro: #003366;
+    --color-azul-claro: #336699;
+    --color-blanco: #FFFFFF;
+    --color-gris-claro: #CCCCCC;
+    --color-verde: #669933;
+}
+
+
+/* Reset */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+nav {
+    background: var(--color-blanco);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    border-bottom: 1px solid var(--color-gris-claro);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Icono del menú */
+.checkbtn {
+    font-size: 30px;
+    color: var(--color-azul-oscuro);
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+    transition: color 0.3s ease;
+}
+
+.checkbtn:hover {
+    color: var(--color-azul-claro);
+}
+
+/* Checkbox oculto */
+#check {
+    display: none;
+}
+
+/* Menú principal */
+nav ul {
+    float: right;
+    margin-right: 300px;
+    display: flex;
+    gap: 20px; /* Espaciado entre elementos */
+}
+
+/* Ítems del menú */
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+
+/* Enlaces del menú */
+nav ul li a {
+    color:black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.4s, transform 0.3s;
+    text-decoration: none;
+}
+
+/* Efecto de subrayado animado */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--color-azul-claro);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1); /* Aparece al pasar el cursor */
+}
+
+/* Elimina el subrayado de la opción "Inicio" */
+nav ul li a.active::after {
+    transform: scaleX(0);
+}
+
+/* Enlace activo o hover */
+li a.active,
+li a:hover {
+    color: var(--color-azul-claro);
+}
+
+/* Saludo del usuario */
+.saludo {
+    display: flex;
+    align-items: center;
+    color: black; 
+    font-size: 18px; 
+    text-transform: capitalize;
+    text-transform: uppercase;
+    padding: 0 20px;
+}
+
+.saludo:hover {
+    color: var(--color-azul-claro);
+}
+
+/* Botones */
+button {
+    background-color:var(--color-azul-claro);
+    color: var(--color-blanco);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color-azul-oscuro);
+}
+
+/* Estilos para el menú en pantallas pequeñas */
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+    }
+
+    ul.menu {
+        display: block;
+        position: fixed;
+        width: 70%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.2);
+        top: 80px;
+        left: -95%;
+        text-align: center;
+        transition: all .5s;
+        backdrop-filter: blur(80rem, 80rem);
+    }
+
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 40px;
+        text-size-adjust: 20px;
+    }
+
+    nav ul li a {
+        font-size: 20px; 
+    }
+
+    li a.active,
+    li a:hover {
+    color: var(--color-azul-claro);
+    }
+    button:hover {
+        background-color: var(--color-azul-oscuro);
+    }
+  
+    #check:checked~ul {
+      left: 0;
+    }
+
+    .saludo {
+        display: block;
+        font-size: 18px;
+        color:black; 
+    }
+    .saludo:hover {
+        color: var(--color-azul-claro);
+    }
+    nav ul li a:hover::after {
+        transform: scaleX(1); 
+    }
+    
+    nav ul li a.active::after {
+        transform: scaleX(0);
+    }
+    
+}
+
+#titulo {
+    font-size: 2.5rem; /* Tamaño grande */
+    color:black;
+    text-align: center; /* Alineación centrada */
+    margin-top: 150px; /* Ajustar el margen superior */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    font-weight: bold; /* Hacer el texto en negrita */
+}
+
+.main-content {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: var(--color-blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 200px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid var(--color-gris-claro);
+}
+
+th {
+    background-color: var(--color-azul-claro);
+    color: var(--color-blanco);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+td {
+    background-color: #f9f9f9;
+    color: var(--color-azul-oscuro);
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1;
+}
+
+tr:hover td {
+    background-color: var(--color-azul-claro);
+    color: var(--color-blanco);
+}
+
+tfoot {
+    background-color: var(--color-azul-oscuro);
+    color: var(--color-blanco);
+}
+
+tfoot td {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
+
+/* Estilos para el footer */
+footer {
+    background-color: #333; 
+    color: #fff; 
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+    margin-top: 150px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+   
+}
+
+.footer-info {
+    max-width: 50%; 
+}
+
+.footer-info p {
+    margin: 5px 0; 
+}
+
+.footer-social {
+    margin-top: 20px; 
+    text-align: center;
+}
+
+.footer-social p {
+    font-size: 18px;
+    color: #fff; 
+    margin-bottom: 10px; 
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 24px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #fff; 
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Colores específicos para cada red social */
+.footer-links a .fa-instagram:hover {
+    color: #e1306c; 
+}
+
+.footer-links a .fa-facebook:hover {
+    color: #4267B2;
+}
+
+.footer-links a .fa-x-twitter:hover {
+    color: #1DA1F2; 
+}
+
+.footer-links a .fa-youtube:hover {
+    color: #FF0000;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    footer{
+        margin-top: 100px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        max-width: 100%; 
+        margin-bottom: 20px; 
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
