@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from datetime import datetime
+from django.contrib.auth import get_user_model 
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, correo, password=None, **extra_fields):
@@ -52,7 +53,8 @@ class Postulacion(models.Model):
         ('aprobada', 'Aprobada'),
         ('rechazada', 'Rechazada'),
     ]
-
+    
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="postulaciones")
     tipo_postulacion = models.CharField(max_length=100)
     formulario = models.FileField(upload_to='formularios/')
     rut_organizacion = models.FileField(upload_to='ruts/')
@@ -65,9 +67,9 @@ class Postulacion(models.Model):
     aportes_terceros = models.FileField(upload_to='postulaciones/', blank=True, null=True)
     cotizaciones = models.JSONField(default=list)
     otros_documentos = models.JSONField(default=list)
-    fecha_postulacion = models.DateTimeField(auto_now_add=True)  
+    fecha_postulacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
-    comentarios = models.TextField(null=True, blank=True)  
+    comentarios = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"Postulación {self.tipo_postulacion} - {self.estado}"

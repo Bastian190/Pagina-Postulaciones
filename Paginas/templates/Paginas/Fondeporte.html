@@ -26,6 +26,7 @@
                 <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
                 <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
                     <li class="saludo">Bienvenido, {{ user.nombre }}</li>
                     <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
                 {% else %}
@@ -56,59 +57,83 @@
         </div>
     
        <!-- Formulario para adjuntar documentos -->
-       <form method="POST" id="form-subvencion" action="{% url 'Fondeporte' %}" id="form-subvencion" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
-        <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="fondeporte">
-        <div class="form-group">
-            <label>1. Formulario de Postulación Completado:</label>
-            <input type="file" name="formulario" accept=".pdf,.docx" required>
-        </div>
-        <div class="form-group">
-            <label>2. Fotocopia Simple del RUT de la organización:</label>
-            <input type="file" name="rut_organizacion" accept=".pdf,.jpg,.png" required>
-        </div>
-        <div class="form-group">
-            <label>3. Fotocopia Simple de Cédula de Identidad del Representante Legal:</label>
-            <input type="file" name="ci_representante" accept=".pdf,.jpg,.png" required>
-        </div>
-        <div class="form-group">
-            <label>4. Certificado de Personalidad Jurídica Vigente:</label>
-            <input type="file" name="certificado_personalidad" accept=".pdf" required>
-        </div>
-        <div class="form-group">
-            <label>5. Certificado de Receptores de Fondos Públicos Nacionales (Ley 19.862):</label>
-            <a href="http://www.registros19862.cl/" target="_blank">Obtener Certificado</a>
-            <input type="file" name="certificado_fondos" accept=".pdf" required>
-        </div>
-        <div class="form-group">
-            <label>6. Fotocopia Simple de la Libreta de Ahorro o Cuenta Corriente:</label>
-            <input type="file" name="cuenta_corriente" accept=".pdf,.jpg,.png" required>
-        </div>
-        <div class="form-group">
-            <label>7. Cotizaciones realizadas (Se requieren 2 (Dos)):</label>
-            <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
-            <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
-        </div>
-        <div class="form-group">
-            <label>8. Acreditación de Propiedad: (Opcional)</label>
-            <input type="file" name="acreditacion_propiedad" accept=".pdf,.jpg,.png">
-        </div>
-        <div class="form-group">
-            <label>9. Declaración Jurada Simple de Aportes Propios (Presentar solo en caso que corresponda):</label>
-            <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
-        </div>
-        <div class="form-group">
-            <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda): </label>
-            <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
-        </div>
-        <div class="form-group">
-            <label>11. Otros Documentos cuando corresponda (Opcional):</label>
-            <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
-        </div>
-    
-        <!-- Botón enviar -->
-        <button type="submit" class="boton-enviar">Enviar Documentos</button>
-    </form>
+       {% if user.is_authenticated %}
+       <form method="POST" id="form-subvencion" action="{% url 'Aporte' %}" enctype="multipart/form-data" novalidate>
+           {% csrf_token %}
+           <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="aporte_extraordinario">
+           
+           <div class="form-group">
+               <label>1. Formulario de Postulación Completado:</label>
+               <input type="file" name="formulario" accept=".pdf,.docx" required>
+           </div>
+           <div class="form-group">
+               <label>2. Fotocopia Simple del RUT de la organización:</label>
+               <input type="file" name="rut_organizacion" accept=".pdf,.jpg,.png" required>
+           </div>
+           <div class="form-group">
+               <label>3. Fotocopia Simple de Cédula de Identidad del Representante Legal:</label>
+               <input type="file" name="ci_representante" accept=".pdf,.jpg,.png" required>
+           </div>
+           <div class="form-group">
+               <label>4. Certificado de Personalidad Jurídica Vigente:</label>
+               <input type="file" name="certificado_personalidad" accept=".pdf" required>
+           </div>
+           <div class="form-group">
+               <label>5. Certificado de Receptores de Fondos Públicos Nacionales (Ley 19.862):</label>
+               <a href="http://www.registros19862.cl/" target="_blank">Obtener Certificado</a>
+               <input type="file" name="certificado_fondos" accept=".pdf" required>
+           </div>
+           <div class="form-group">
+               <label>6. Fotocopia Simple de la Libreta de Ahorro o Cuenta Corriente:</label>
+               <input type="file" name="cuenta_corriente" accept=".pdf,.jpg,.png" required>
+           </div>
+           <div class="form-group">
+               <label>7. Cotizaciones realizadas (Se requieren 2 (Dos)):</label>
+               <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
+               <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
+           </div>
+           <div class="form-group">
+               <label>8. Acreditación de Propiedad: (Opcional)</label>
+               <input type="file" name="acreditacion_propiedad" accept=".pdf,.jpg,.png">
+           </div>
+           <div class="form-group">
+               <label>9. Declaración Jurada Simple de Aportes Propios (Presentar solo en caso que corresponda):</label>
+               <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
+           </div>
+           <div class="form-group">
+               <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda):</label>
+               <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
+           </div>
+           <div class="form-group">
+               <label>11. Otros Documentos cuando corresponda (Opcional):</label>
+               <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
+           </div>
+           
+           <button type="submit" class="boton-enviar">Enviar Documentos</button>
+       </form>
+       {% else %}
+       <p style="color: rgb(9, 58, 95); font-weight: bold;">Para postular, inicia sesión <a href="{% url 'Login' %}">aquí</a>.</p>
+       {% endif %}
+       {% block messages %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <script>
+                setTimeout(function() {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(function(alert) {
+                        alert.classList.remove('show');
+                        alert.classList.add('fade');
+                    });
+                }, 5000);
+            </script>
+        {% endif %}
+        {% endblock %}
     </section>
 
 

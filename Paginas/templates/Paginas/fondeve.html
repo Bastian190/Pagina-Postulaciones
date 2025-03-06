@@ -25,6 +25,7 @@
             <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
             <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
             {% if user.is_authenticated %}
+                <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
                 <li class="saludo">Bienvenido, {{ user.nombre }}</li>
                 <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
             {% else %}
@@ -55,9 +56,11 @@
         </div>
     
         <!-- Formulario para adjuntar documentos -->
-        <form method="POST" id="form-subvencion" action="{% url 'fondeve' %}" id="form-subvencion" enctype="multipart/form-data" novalidate>
+        {% if user.is_authenticated %}
+        <form method="POST" id="form-subvencion" action="{% url 'Aporte' %}" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="fondeve">
+            <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="aporte_extraordinario">
+            
             <div class="form-group">
                 <label>1. Formulario de Postulación Completado:</label>
                 <input type="file" name="formulario" accept=".pdf,.docx" required>
@@ -97,17 +100,39 @@
                 <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
             </div>
             <div class="form-group">
-                <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda): </label>
+                <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda):</label>
                 <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
             </div>
             <div class="form-group">
                 <label>11. Otros Documentos cuando corresponda (Opcional):</label>
                 <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
             </div>
-        
-            <!-- Botón enviar -->
+            
             <button type="submit" class="boton-enviar">Enviar Documentos</button>
         </form>
+        {% else %}
+        <p style="color: rgb(9, 58, 95); font-weight: bold;">Para postular, inicia sesión <a href="{% url 'Login' %}">aquí</a>.</p>
+        {% endif %}
+        {% block messages %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <script>
+                setTimeout(function() {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(function(alert) {
+                        alert.classList.remove('show');
+                        alert.classList.add('fade');
+                    });
+                }, 5000);
+            </script>
+        {% endif %}
+        {% endblock %}
     </section>
 
 

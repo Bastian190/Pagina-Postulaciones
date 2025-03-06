@@ -35,8 +35,9 @@ def procesar_postulacion(request):
 
         archivos = {campo: request.FILES.get(campo) for campo in campos_archivos}
 
-        # Guardar la postulación en la base de datos
+        # Guardar la postulación en la base de datos, incluyendo el usuario actual
         postulacion = Postulacion.objects.create(
+            usuario=request.user,  # Asegúrate de incluir al usuario aquí
             tipo_postulacion=tipo_postulacion,
             cotizaciones=[archivo.name for archivo in cotizaciones],
             otros_documentos=[archivo.name for archivo in request.FILES.getlist('otros_documentos[]')],
@@ -47,6 +48,7 @@ def procesar_postulacion(request):
         return redirect('home')
 
     return render(request, 'formulario_postulacion.html')
+
 
 def vista_postulacion(request, template_name):
     if request.method == 'POST':
@@ -168,6 +170,8 @@ def lista_postulaciones(request):
     postulaciones = Postulacion.objects.all()
     print("Postulaciones:", postulaciones)  # Verifica qué datos se están pasando
     return render(request, 'Paginas/Postulacion.html', {'postulaciones': postulaciones})
+
+
 def cambiar_estado(request, postulacion_id):
     postulacion = get_object_or_404(Postulacion, id=postulacion_id)
     
@@ -178,8 +182,24 @@ def cambiar_estado(request, postulacion_id):
         postulacion.estado = nuevo_estado
         postulacion.comentarios = comentarios
         postulacion.save()
-
+        messages.success(request, f"El estado de la postulación '{postulacion.tipo_postulacion}' ha sido cambiado a {postulacion.get_estado_display()} correctamente.")
         return redirect('postulacion')  # Redirige a la página de postulaciones
     
     return render(request, 'Paginas/Postulacion.html', {'postulacion': postulacion})
 
+
+def estado(request):
+    postulaciones = Postulacion.objects.filter(usuario=request.user).order_by('-fecha_postulacion')
+
+    return render(request, 'Paginas/estado.html', {'postulaciones': postulaciones})
+
+def eliminar_postulacion(request, postulacion_id):
+    # Obtener la postulación que el usuario quiere eliminar
+    postulacion = get_object_or_404(Postulacion, id=postulacion_id, usuario=request.user)
+
+    # Eliminar la postulación
+    postulacion.delete()
+
+    # Mensaje de éxito
+    messages.success(request, '¡Postulación eliminada con éxito!')
+    return redirect('estado')

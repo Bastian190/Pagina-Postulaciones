@@ -116,15 +116,26 @@
                 <!-- Botón de Registro -->
                 <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
             </form>
-            {% if messages %}
-                <div class="alert-container">
-                    {% for message in messages %}
-                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+            {% block messages %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <script>
+                setTimeout(function() {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(function(alert) {
+                        alert.classList.remove('show');
+                        alert.classList.add('fade');
+                    });
+                }, 5000);
+            </script>
+        {% endif %}
+        {% endblock %}
         </fieldset>
     </section>
     

@@ -8,13 +8,11 @@
 }
 
 /* General */
-body {
-    font-family: 'Poppins', sans-serif;
+html, body { 
+    height: 100%; /* Ocupa toda la altura de la pantalla */
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: var(--color-blanco);
-    color: var(--color-azul-oscuro);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Reset */
@@ -25,7 +23,15 @@ body {
     list-style: none;
     box-sizing: border-box;
 }
-
+.wrapper {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1; /* Hace que el contenido crezca */
+    padding-bottom: 20px; /* Espacio para que no se solape con el footer */
+}
 /* Navbar */
 nav {
     background: var(--color-blanco);
@@ -65,7 +71,7 @@ nav {
 /* Menú principal */
 nav ul {
     float: right;
-    margin-right: 330px;
+    margin-right: 80px;
     display: flex;
     gap: 20px; /* Espaciado entre elementos */
 }
@@ -366,11 +372,13 @@ input[type="file"] {
 
 
 footer {
-    background-color: #333; 
-    color: #fff; 
-    font-family: Arial, sans-serif;
-    padding: 20px 0;
-    margin-top: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    width: 100%;
+    
 }
 
 .footer-content {
@@ -463,9 +471,4 @@ footer {
     .footer-links {
         justify-content: center;
     }
-}
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
 }

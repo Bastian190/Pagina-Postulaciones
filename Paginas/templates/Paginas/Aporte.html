@@ -10,112 +10,137 @@
     <script src="https://kit.fontawesome.com/c5df39abaa.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <!-- Checkbox para el menú responsivo -->
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fa-solid fa-bars" style="color: #000000;"></i>
-            </label>
-    
-            <!-- Menú principal -->
-            <ul class="menu">
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
-                <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
-                <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
-                <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
-                {% if user.is_authenticated %}
-                    <li class="saludo">Bienvenido, {{ user.nombre }}</li>
-                    <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
-                {% else %}
-                    <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-
-
-    <section id="postulacion-subvencion">
-        <h1>Postulación a Aporte Extraordinario</h1>
-        <p>
-            Los documentos indicados son requisitos necesarios para postular a una subvención municipal. 
-            De no ser presentados, la postulación será considerada inadmisible.
-        </p>
-        <p class="advertencia">
-            Los certificados indicados en los puntos 4, 5 y 6 deben haber sido emitidos con un máximo de 
-            30 días de antigüedad contados desde la fecha de presentación del proyecto.
-        </p>
-    
-        <!-- Enlace para descargar el formulario -->
-        <div class="descarga-formulario">
-            <p>Descargue aquí el formulario de postulación:</p>
-            <a href="{% static 'formularios/ANEXO 1, ORIGINAL 2025.docx' %}" class="boton-descargar" download>
-                Descargar Formulario de Postulación
-            </a>
-        </div>
-    
-        <!-- Formulario para adjuntar documentos -->
-        <form method="POST" id="form-subvencion" action="{% url 'Aporte' %}" enctype="multipart/form-data" novalidate>
-            {% csrf_token %}
-            <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="aporte_extraordinario">
-            
-            <div class="form-group">
-                <label>1. Formulario de Postulación Completado:</label>
-                <input type="file" name="formulario" accept=".pdf,.docx" required>
-            </div>
-            <div class="form-group">
-                <label>2. Fotocopia Simple del RUT de la organización:</label>
-                <input type="file" name="rut_organizacion" accept=".pdf,.jpg,.png" required>
-            </div>
-            <div class="form-group">
-                <label>3. Fotocopia Simple de Cédula de Identidad del Representante Legal:</label>
-                <input type="file" name="ci_representante" accept=".pdf,.jpg,.png" required>
-            </div>
-            <div class="form-group">
-                <label>4. Certificado de Personalidad Jurídica Vigente:</label>
-                <input type="file" name="certificado_personalidad" accept=".pdf" required>
-            </div>
-            <div class="form-group">
-                <label>5. Certificado de Receptores de Fondos Públicos Nacionales (Ley 19.862):</label>
-                <a href="http://www.registros19862.cl/" target="_blank">Obtener Certificado</a>
-                <input type="file" name="certificado_fondos" accept=".pdf" required>
-            </div>
-            <div class="form-group">
-                <label>6. Fotocopia Simple de la Libreta de Ahorro o Cuenta Corriente:</label>
-                <input type="file" name="cuenta_corriente" accept=".pdf,.jpg,.png" required>
-            </div>
-            <div class="form-group">
-                <label>7. Cotizaciones realizadas (Se requieren 2 (Dos)):</label>
-                <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
-                <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
-            </div>
-            <div class="form-group">
-                <label>8. Acreditación de Propiedad: (Opcional)</label>
-                <input type="file" name="acreditacion_propiedad" accept=".pdf,.jpg,.png">
-            </div>
-            <div class="form-group">
-                <label>9. Declaración Jurada Simple de Aportes Propios (Presentar solo en caso que corresponda):</label>
-                <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
-            </div>
-            <div class="form-group">
-                <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda):</label>
-                <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
-            </div>
-            <div class="form-group">
-                <label>11. Otros Documentos cuando corresponda (Opcional):</label>
-                <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
-            </div>
-            
-            <button type="submit" class="boton-enviar">Enviar Documentos</button>
-        </form>
-        {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-        {% endif %}
+    <div class="wrapper">
+        <header>
+            <nav>
+                <!-- Checkbox para el menú responsivo -->
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fa-solid fa-bars" style="color: #000000;"></i>
+                </label>
         
-    </section>
+                <!-- Menú principal -->
+                <ul class="menu">
+                    <li><a href="{% url 'home' %}">Inicio</a></li>
+                    <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
+                    <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
+                    <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
+                    <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
+                        <li class="saludo">Bienvenido, {{ user.nombre }}</li>
+                        <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+                    {% else %}
+                        <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="postulacion-subvencion">
+                <h1>Postulación a Aporte Extraordinario</h1>
+                <p>
+                    Los documentos indicados son requisitos necesarios para postular a una subvención municipal. 
+                    De no ser presentados, la postulación será considerada inadmisible.
+                </p>
+                <p class="advertencia">
+                    Los certificados indicados en los puntos 4, 5 y 6 deben haber sido emitidos con un máximo de 
+                    30 días de antigüedad contados desde la fecha de presentación del proyecto.
+                </p>
+            
+                <!-- Enlace para descargar el formulario -->
+                <div class="descarga-formulario">
+                    <p>Descargue aquí el formulario de postulación:</p>
+                    <a href="{% static 'formularios/ANEXO 1, ORIGINAL 2025.docx' %}" class="boton-descargar" download>
+                        Descargar Formulario de Postulación
+                    </a>
+                </div>
+            
+                <!-- Formulario para adjuntar documentos -->
+                {% if user.is_authenticated %}
+                <form method="POST" id="form-subvencion" action="{% url 'Aporte' %}" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" id="tipo_postulacion" name="tipo_postulacion" value="aporte_extraordinario">
+                    
+                    <div class="form-group">
+                        <label>1. Formulario de Postulación Completado:</label>
+                        <input type="file" name="formulario" accept=".pdf,.docx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>2. Fotocopia Simple del RUT de la organización:</label>
+                        <input type="file" name="rut_organizacion" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label>3. Fotocopia Simple de Cédula de Identidad del Representante Legal:</label>
+                        <input type="file" name="ci_representante" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label>4. Certificado de Personalidad Jurídica Vigente:</label>
+                        <input type="file" name="certificado_personalidad" accept=".pdf" required>
+                    </div>
+                    <div class="form-group">
+                        <label>5. Certificado de Receptores de Fondos Públicos Nacionales (Ley 19.862):</label>
+                        <a href="http://www.registros19862.cl/" target="_blank">Obtener Certificado</a>
+                        <input type="file" name="certificado_fondos" accept=".pdf" required>
+                    </div>
+                    <div class="form-group">
+                        <label>6. Fotocopia Simple de la Libreta de Ahorro o Cuenta Corriente:</label>
+                        <input type="file" name="cuenta_corriente" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label>7. Cotizaciones realizadas (Se requieren 2 (Dos)):</label>
+                        <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
+                        <input type="file" name="cotizaciones[]" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label>8. Acreditación de Propiedad: (Opcional)</label>
+                        <input type="file" name="acreditacion_propiedad" accept=".pdf,.jpg,.png">
+                    </div>
+                    <div class="form-group">
+                        <label>9. Declaración Jurada Simple de Aportes Propios (Presentar solo en caso que corresponda):</label>
+                        <input type="file" name="aportes_propios" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label>10. Declaración Jurada Simple de Aportes de Terceros (Presentar solo en caso que corresponda):</label>
+                        <input type="file" name="aportes_terceros" accept=".pdf,.jpg,.png">
+                    </div>
+                    <div class="form-group">
+                        <label>11. Otros Documentos cuando corresponda (Opcional):</label>
+                        <input type="file" name="otros_documentos[]" multiple accept=".pdf,.jpg,.png">
+                    </div>
+                    
+                    <button type="submit" class="boton-enviar">Enviar Documentos</button>
+                </form>
+                {% else %}
+                <p style="color: rgb(9, 58, 95); font-weight: bold;">Para postular, inicia sesión <a href="{% url 'Login' %}">aquí</a>.</p>
+                {% endif %}
+                {% block messages %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <script>
+                setTimeout(function() {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(function(alert) {
+                        alert.classList.remove('show');
+                        alert.classList.add('fade');
+                    });
+                }, 5000);
+            </script>
+        {% endif %}
+        {% endblock %}
+                
+            </section>
+    
+        </main>
+    </div>
+    
 
 
     <footer>

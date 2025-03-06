@@ -28,6 +28,7 @@
                     <li><a href="{% url 'postulacion' %}">Postulaciones</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
+                <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
                 <li class="saludo"><span>Bienvenido, {{ user.nombre }}</span></li>
                     <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
                 {% else %}
@@ -65,6 +66,14 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
     </section>
     {% else %}
         <p>No hay postulaciones disponibles.</p>

@@ -1,17 +1,13 @@
 {% load static %} 
-
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal postulaciones</title>
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <title>Estado postulaciones</title>
+    <link rel="stylesheet" href="{% static 'css/estado.css' %}">
     <script src="https://kit.fontawesome.com/c5df39abaa.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <header>
         <nav>
@@ -23,64 +19,71 @@
     
             <!-- Menú principal -->
             <ul class="menu">
-                <li><a  href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'subvencion' %}">Subvención general</a></li>
                 <li><a href="{% url 'Aporte' %}">Aporte extraordinario</a></li>
                 <li><a href="{% url 'fondeve' %}">Fondeve</a></li>
                 <li><a href="{% url 'Fondeporte' %}">Fondeporte</a></li>
-                {% if request.user.is_authenticated and request.user.es_funcionario %}
-                    <li><a href="{% url 'postulacion' %}">Postulaciones</a></li>
-                {% endif %}
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
-                <li class="saludo"><span>Bienvenido, {{ user.nombre }}</span></li>
+                    <li><a href="{% url 'estado' %}">Mis postulaciones</a></li>
+                    <li class="saludo">Bienvenido, {{ user.nombre }}</li>
                     <li><a href="{% url 'Logout' %}">Cerrar Sesión</a></li>
                 {% else %}
                     <li><a href="{% url 'Login' %}">Iniciar Sesión</a></li>
                 {% endif %}
-                
             </ul>
         </nav>
     </header>
+    {% block content %}
+    <div class="container">
+        <h2>Estado de tus Postulaciones</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha de Postulación</th>
+                    <th>Tipo de Postulación</th>
+                    <th>Estado</th>
+                    <th>Comentario</th>
+                    <th>Acciones</th> <!-- Añadí una columna para las acciones -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in postulaciones %}
+                <tr>
+                    <td>{{ post.fecha_postulacion|date:"d/m/Y H:i" }}</td>
+                    <td>{{ post.tipo_postulacion }}</td>
+                    <td>
+                        {% if post.estado == "pendiente" %}
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% elif post.estado == "en_revision" %}
+                            <span class="badge bg-info text-dark">En revisión</span>
+                        {% elif post.estado == "aprobada" %}
+                            <span class="badge bg-success">Aprobada</span>
+                        {% else %}
+                            <span class="badge bg-danger">Rechazada</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ post.comentarios|default:"Sin comentarios" }}</td>
+                    {% if post.usuario == request.user %}
+                    <td>
+                        <a href="{% url 'eliminar_postulacion' post.id %}" 
+                           onclick="return confirm('¿Estás seguro de que quieres eliminar esta postulación?')">Eliminar mi postulación</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">No tienes postulaciones registradas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
     
-    
- 
-    
-    <section id="seccion1">
-        <img src="{% static 'img/Nogales.png' %}" alt="Fondo" id="fondo-img">
-        <div id="titulo-container">
-            <h1 id="titulo">Bienvenido al portal de postulación a subvenciones</h1>
-        </div>
-    </section>
-    <section id="postula">
-        <h1>¿Cuáles son las opciones a las que puedo postular?</h1>
-        <div class="subvenciones-grid">
-            <div  class="subvencion-item">
-                <a href="{% url 'subvencion' %}" class="subvencion">
-                    <i  class="fa-solid fa-hand-holding-dollar"></i>
-                    <p>Subvención general</p>
-                </a>
-            </div>
-            <div class="subvencion-item">
-                <a href="{% url 'Aporte' %}" class="subvencion">
-                    <i class="fa-solid fa-gift"></i>
-                    <p>Aporte Extraordinario</p>
-                </a>
-            </div>
-            <div class="subvencion-item">
-                <a href="{% url 'fondeve' %}" class="subvencion">
-                    <i class="fa-solid fa-people-carry-box"></i>
-                    <p>Fondeve</p>
-                </a>
-            </div>
-            <div class="subvencion-item">
-                <a href="{% url 'Fondeporte' %}" class="subvencion">
-                    <i class="fa-solid fa-basketball"></i>
-                    <p>Fondeporte</p>
-                </a>
-            </div>
-        </div>
-    </section>
+
+
+
 
 
 
@@ -119,9 +122,6 @@
             <p>&copy; 2025 Municipalidad de Nogales</p>
         </div>
     </footer>
-    
-    
-    
 
 
 
@@ -134,13 +134,10 @@
 
 
 
-
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
 </body>
-
 </html>
